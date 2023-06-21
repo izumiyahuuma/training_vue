@@ -5,13 +5,18 @@ import { Person } from '../types';
 const props = defineProps({
   persons: { type: Object as PropType<Array<Person>> },
 });
+const emit = defineEmits(['delete-person']);
+
+const deletePerson = (id: number) => {
+  emit('delete-person', id);
+};
 </script>
 <template>
   <ul>
     <li v-for="person in persons">
       <span>{{ person.name }}</span>
       <span>{{ person.age }}</span>
-      <span><button>delete</button></span>
+      <span><button @click="deletePerson(person.id)">delete</button></span>
     </li>
   </ul>
 </template>
